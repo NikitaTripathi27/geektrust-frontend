@@ -5,6 +5,10 @@
 }
 .Main-header{
     font-weight: bold ;
+    
+}
+.tf{
+    width: 100%;
 }
 .selectedRow{
     background-color:lightgrey ;
@@ -17,10 +21,18 @@
     flex-direction: row ; 
     justify-content: space-around ;
     padding-left: 35px;
+    align-items: center;
+    margin-top: 1rem;
     
 }
 .paginate-btn{
     padding-left: 5px ;
     padding-right: 5px ;
     padding-top: 2px;
+}
+@media only screen and (max-width:600px){
+   .footer-btns{
+    display: flex;
+    flex-direction: column;
+   }
 }

@@ -1,11 +1,11 @@
-// import logo from './logo.svg';
 import './App.css';
-// import BasicTable from "./Home"
-import BasicTable from "./adminUI"
+// import BasicTable from './components/admin';
+import UserTable from './userTable';
+// import BasicTable from "./admin.UI"
 function App() {
   return (
     <div className="App">
-      <BasicTable />
+      <UserTable />
     </div>
   );
 }
