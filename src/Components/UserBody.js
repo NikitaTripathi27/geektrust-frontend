@@ -4,8 +4,7 @@ import SaveAltIcon from "@mui/icons-material/SaveAlt";
 import IconButton from "@mui/material/IconButton";
 import Checkbox from "@mui/material/Checkbox";
 import TableRow from "@mui/material/TableRow";
-// import TablecellEdit   from "./tablecelledit";
-import EditTable from "./editTable";
+import EditTable from "./EditTable";
 
 const UserBody = ({
   rowsPerPage,
@@ -31,22 +30,25 @@ const UserBody = ({
     const valueEdited = userarray.map((item) =>
       item.id === key && name ? { ...item, [name]: value } : item
     );
+    // let valueEdited = userarray.filter((ele)=>ele.id===key)
+    
     setuserarray(valueEdited);
     setuserList(valueEdited);
   };
 
+  /**
+   * function makes edit button unactive
+   */
   const saveItem = () => {
     setdoEdit(null);
   };
 
   return (
     <>
-      {(rowsPerPage > 0
-        ? userarray.slice(
+      {( userarray.slice(
             (currentPage - 1) * rowsPerPage,
             (currentPage - 1) * rowsPerPage + rowsPerPage
           )
-        : userarray
       ).map((row, index) => (
         <TableRow
           key={index}
@@ -64,7 +66,6 @@ const UserBody = ({
                 <Checkbox checked={checkboxarray.includes(row.id)} />
               </TableCell>
               <TableCell id="rowEdit">
-                {" "}
                 <input
                   name="name"
                   value={row.name}
@@ -96,7 +97,7 @@ const UserBody = ({
                   color="error"
                   onClick={() => saveItem()}
                 >
-                  <SaveAltIcon color="Primary"  />
+                  <SaveAltIcon color="primary"  />
                 </IconButton>
               </TableCell>
             </>

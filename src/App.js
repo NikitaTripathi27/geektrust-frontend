@@ -1,6 +1,6 @@
 import './App.css';
 // import BasicTable from './components/admin';
-import UserTable from './userTable';
+import UserTable from './Components/UserTable';
 // import BasicTable from "./admin.UI"
 function App() {
   return (

@@ -1,6 +1,6 @@
 import Pagination from "@mui/material/Pagination";
 import Box from "@mui/material/Box"
-import "./Home.css"
+import "../Home.css"
 
 const PaginationButtons = ({userarray, currentPage ,setcurrentPage, rowsPerPage }) => {
   let pages=0;

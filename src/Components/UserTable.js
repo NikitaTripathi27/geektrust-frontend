@@ -11,13 +11,22 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import Box from "@mui/material/Box";
 import Paginate from "./Paginate";
-import "./Home.css";
-import UserBody from "./userBody";
+import "../Home.css";
+import UserBody from "./UserBody";
 import DeleteIcon from "@mui/icons-material/Delete";
-import SearchUser from "./userSearch";
+import SearchUser from "./UserSearch";
+
+
+/**
+ * 
+ * @typedef {Object} admin -The Details of user 
+ * @property {String} id - id of User
+ * @property {String} name - name of user
+ * @property {String} email - email of user
+ */
 export default function UserTable(){
   const [currentPage, setcurrentPage] = React.useState(1);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const rowsPerPage= 10;
   const [doEdit, setdoEdit] = React.useState(null);
   const [userarray, setuserarray] = React.useState([]);
   const [userList, setuserList] = React.useState([]);
@@ -26,6 +35,7 @@ export default function UserTable(){
   const [deleteSelectAll, setdeleteSelectAll] = React.useState(false);
   const [selectallList, setselectallList] = React.useState([]);
   const [debounceId, setdebounceId] = React.useState(0);
+  const [checked , setchecked] = React.useState(false);
   /**
    * Perform the get User api call
    * set the admin users
@@ -44,36 +54,6 @@ export default function UserTable(){
 
   const countPages = Math.ceil(userarray.length) / rowsPerPage;
 
-  // /**
-  //  * @param {String} targetValue
-  //  * Function returns users based on targetValue
-  //  * targetValue can belong to any category,if its empty we will display all the users
-  //  */
-
-  // const handleonChange = (targetValue) => {
-  //   let newTarget = targetValue.toLowerCase();
-  //   const searchValue = userList.filter(
-  //     (person) =>
-  //       person.name.toLowerCase().match(newTarget) ||
-  //       person.email.toLowerCase().match(newTarget) ||
-  //       person.role.toLowerCase().match(newTarget)
-  //   );
-  //   setuserarray(searchValue);
-  // };
-
-  // /**
-  //  *
-  //  * @param {event} event
-  //  * Function will call handleonChange function after a given setTimeout
-  //  */
-  // const debounceSearch = (event) => {
-  //   if (debounceId) clearTimeout(debounceId);
-
-  //   let timerId = setTimeout(() => {
-  //     handleonChange(event.target.value);
-  //   }, 500);
-  //   setdebounceId(timerId);
-  // };
   /**
    * @param {id} isChecked
    * function checks all boxes if button is clicked ,
@@ -85,6 +65,7 @@ export default function UserTable(){
     let selectallkey = [];
     let unselectall = [];
     if (isChecked) {
+      setchecked(!checked);
       for (
         let i = (currentPage - 1) * rowsPerPage;
         i < (currentPage - 1) * rowsPerPage + rowsPerPage;
@@ -98,6 +79,7 @@ export default function UserTable(){
       setcheckboxarray(selectallkey);
     } else {
       setcheckboxarray(unselectall);
+      setchecked(!checked)
     }
   };
 
@@ -110,15 +92,16 @@ export default function UserTable(){
       const newarr = userarray.filter((ele) => {
         return !selectallList.includes(ele.id);
       });
+      
       setuserarray(newarr);
       setuserList(newarr);
       setcheckboxarray([]);
+      setchecked(!checked)
     } else {
       const newarr = userarray.filter((ele) => {
         return !keyarray.includes(ele.id);
       });
       setuserarray(newarr);
-      setuserList(newarr);
       setuserList(newarr);
     }
   };
@@ -135,6 +118,7 @@ export default function UserTable(){
           <TableRow>
             <TableCell>
               <Checkbox
+                checked={checked}
                 color="primary"
                 onClick={(event) => handleSelectAll(event.target.checked)}
               />

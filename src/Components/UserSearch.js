@@ -40,7 +40,7 @@ return(
           placeholder="Search Name,Email or Role"
           variant="outlined"
           type="text"
-          className="tf"
+          className="searchbar"
           onChange={(event) => debounceSearch(event)}
         />
     </>
